@@ -1,0 +1,23 @@
+function doGet(e) { 
+  // Logger.log(e);  
+  // return HtmlService.createHtmlOutputFromFile("page");
+  var tmp = HtmlService.createTemplateFromFile("page"); 
+  tmp.title = "My title";
+  tmp.list = ["GS","Exel"];
+  return tmp.evaluate(); 
+}
+
+
+function userClicked(userInfo){
+  var url = "https://docs.google.com/spreadsheets/d/1wg9sFF3RJHxzIH5fVyRzRS836mvVbtS2e-7uerSIFoQ/edit#gid=0";
+  var ss = SpreadsheetApp.openByUrl(url);
+  var ws = ss.getSheetByName("Data");
+
+  ws.appendRow([userInfo.firstName,userInfo.lastName,userInfo.app, new Date()]);  
+
+  //Logger.log( name + " clicked the btn");
+}
+
+function include(filename){
+  return HtmlService.createHtmlOutputFromFile(filename).getContent();
+}
